@@ -3,6 +3,7 @@ import random
 import base64
 import csv
 import login
+import get_questions
 
 def get_token():
     # get random username from csv file
@@ -69,6 +70,7 @@ def edit_question(question_id):
 
 if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
+    get_questions.main()
     questions = read_questions()
     for question_id in questions:
         print(edit_question(question_id[0]))

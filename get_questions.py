@@ -25,21 +25,26 @@ def save_to_csv(data, filename='tz_farmers.csv'):
     except Exception as e:
         print(f"Error saving to CSV: {e}")
 
-try:
-    response = requests.get(search_url, headers=headers)
-    response.raise_for_status()
-    data = response.json().get("data", {}).get("itemList", [])
-    print(len(data))
-    
-    if not data:
-        print("No data found in the response")
-    else:
-        save_to_csv(data)
+def main():
+    try:
+        response = requests.get(search_url, headers=headers)
+        response.raise_for_status()
+        data = response.json().get("data", {}).get("itemList", [])
+        print(len(data))
         
-except requests.exceptions.RequestException as e:
-    print(f"Error making request: {e}")
-except ValueError as e:
-    print(f"Error parsing JSON response: {e}")
-except Exception as e:
-    print(f"An unexpected error occurred: {e}")
-    print("Raw response:", response.text)
+        if not data:
+            print("No data found in the response")
+        else:
+            save_to_csv(data)
+            
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+    except ValueError as e:
+        print(f"Error parsing JSON response: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        print("Raw response:", response.text)
+
+
+if __name__ == "__main__":
+    main()
