@@ -25,7 +25,8 @@ def ask_question(swali):
         "wardId":random.randint(0,207),
         "villageId":random.randint(1,890),
         "advisoryGroupEnum":"ADVICE",
-        "description":f"{swali}😪",
+        "description":f"{swali}",
+        
     }
     headers = {
         "Authorization": f"Bearer {get_token()}",
@@ -41,5 +42,5 @@ def ask_question(swali):
 if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
     
-    swali = "Tutapata lini mtaji?"
+    swali = test.main()
     print(ask_question(swali))
