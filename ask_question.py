@@ -1,6 +1,7 @@
 import cloudscraper
 import random
 import csv
+import base64
 import login
 import generate_question
 
@@ -17,6 +18,12 @@ def get_token():
             emails.append(row[0])
     token = login.login(random.choice(emails), "matako@1998")
     return token
+
+def get_inspirobot_quote_image():
+    resp = scraper.get("https://dog.ceo/api/breeds/image/random").json()
+    image_url = resp["message"]
+    img = scraper.get(image_url).content
+    return base64.b64encode(img).decode("utf-8")
     
 def ask_question(swali):
     ques_url = "https://ekilimo.kilimo.go.tz/gateway/ikmis-crop-management-service/api/v1/advisory-inquiry"
@@ -26,6 +33,7 @@ def ask_question(swali):
         "wardId":random.randint(0,207),
         "villageId":random.randint(1,890),
         "advisoryGroupEnum":"ADVICE",
+        "photo": get_inspirobot_quote_image(),
         "description":f"{swali}",
         
     }
@@ -43,5 +51,6 @@ def ask_question(swali):
 if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
     
-    swali = generate_question.generate_questions()
-    print(ask_question(swali))
+    for i in range(10):
+        swali = generate_question.generate_question()
+        print(ask_question(swali))

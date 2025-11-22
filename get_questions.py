@@ -2,7 +2,8 @@ import requests
 import csv
 import login
 
-search_url = "https://ekilimo.kilimo.go.tz/gateway/ikmis-crop-management-service/api/v1/advisory-inquiry?pageSize=1000"
+search_url = "https://ekilimo.kilimo.go.tz/gateway/ikmis-crop-management-service/api/v1/advisory-inquiry?pageNo=&pageSize=10"
+
 
 token = login.login("kigoshomusic@gmail.com", "@00n4ceynRaD")
 headers = {

@@ -24,20 +24,11 @@ def read_questions():
         next(reader)
         return list(reader)
 
-def get_random_question():
-    with open("questions.txt", "r") as z:
-        questions = z.readlines()
-        return random.choice(questions)
 
 def get_inspirobot_quote_image():
-
-    # Step 1: Get image URL
     resp = scraper.get("https://dog.ceo/api/breeds/image/random").json()
     image_url = resp["message"]
-
-    # Step 2: Download image
     img = scraper.get(image_url).content
-
     return base64.b64encode(img).decode("utf-8")
 
 
@@ -53,7 +44,7 @@ def edit_question(question_id):
         "wardId":random.randint(0,207),
         "villageId":random.randint(1,890),
         "advisoryGroupEnum":"ADVICE",
-        # "description":get_random_question(),
+        # "description":"",
         "photo": get_inspirobot_quote_image(),
         "name":"nyama choma",
     }
@@ -72,5 +63,6 @@ if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
     get_questions.main()
     questions = read_questions()
+    # token = get_token()
     for question_id in questions:
         print(edit_question(question_id[0]))

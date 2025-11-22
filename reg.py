@@ -1,6 +1,7 @@
 import cloudscraper
 from faker import Faker
 import csv
+import random
 
 
 
@@ -13,11 +14,17 @@ def register(email):
     ext_payload = {"firstName":"BINTI","middleName":"MKUBWA","surname":"MALI","nida":"89536984378935676589","gender":"FEMALE","phoneNumber":"","email":"samiasuluhu@gmail.com","educationLevel":"BachelorDegree","extensionOfficerEnum":"PUBLIC","checkNumber":5678,"professionalismEnum":"CropExtensionOfficer","extensionOfficerServicesEnum":"AgriculturalInputSupply","workStationType":"REGION","designation":"RegionalAgriculturalExtensionOfficer(RAO)","regionId":19}
     
     reg_payload = {
-        "firstName":fake.first_name_female(),
-        "middleName":fake.last_name_female(),
+        "firstName":"  ",
+        "middleName":"  ",
         "surname":"",
         "mobileNumber":"",
+        # "userType":"EXTENSION",
         "userType":"FARMER",
+        "workStationType": random.choice([
+            "COUNCIL", "DEPARTMENT", "NON_GOVERNMENT", "UNIT", "INSTITUTE",
+            "BOARD", "COUNCIL4EXTENSIONS", "VILLAGE", "MOA", "SECTION",
+            "WARD", "REGION"
+        ]),
         "gender":"",
         "email":email,
         "password":"matako@1998",
@@ -37,17 +44,18 @@ def register(email):
 
     resp = scraper.post(reg_url, json=reg_payload, headers=headers)
     # resp = scraper.post(ext_url, json=ext_payload, headers=headers)
+    print(resp.text)
     return resp.json().get("description")
 
 if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
     fake = Faker()
 
-    for i in range(10):
+    for i in range(1):
         email = fake.name().replace(" ", "").lower()
         reg_status = register(email)
-        print(reg_status)
-        if reg_status.lower == "completed successfully":
+        print(reg_status.lower())
+        if reg_status.lower() == "completed successfully":
             with open("acc.csv", "a", newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow([email])  # email as a single-column row

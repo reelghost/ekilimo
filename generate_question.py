@@ -1,49 +1,46 @@
 import random
 
 president_refs = [
-    "Rais wetu anasema nini",
-    "Je Mheshimiwa Rais anatuelezea vipi",
-    "Rais ana mpango gani",
-    "Je Rais anajua kwamba",
-    "Kwa nini Rais hasemi wazi"
-]
+        "Rais wetu anasema nini",
+        "Je Mheshimiwa Rais anaongeleaje",
+        "Rais anatuambia nini kuhusu",
+        "Je Rais anafahamu changamoto hizi za",
+        "Kwa nini hatupati majibu ya wazi kuhusu",
+        "serikali inafanya nini kuhusu",
+        "wizara husika imefika wapi",
+        "maafisa wanatoa majibu gani",
+        "mchakato rasmi uko wapi",
+        "ni hatua gani zimechukuliwa"
+    ]
 
-gov_refs = [
-    "serikali inafanya nini",
-    "wabunge wamefikia wapi",
-    "mawaziri wana mipango gani",
-    "vyombo vya usalama vinafanya kazi gani",
-    "serikali imejipangaje"
-]
+injecting_bits = [
+        "au ndo maamuzi yamekula shifting?",
+        "ama taarifa zenyewe zimepotea barabarani?",
+        "au tunaambiwa tuvune matumaini tu?",
+        "ama kila kitu kiko pending kama vibali vyenyewe?",
+        "au tunapewa ahadi ambazo hazina stakabadhi?"
+    ]
 
-funny_bits = [
-    "au ni masihara tu?",
-    "ama tunadanganywa hadharani?",
-    "au tumebaki kuwa watazamaji?",
-    "ama ndo mambo yamewashinda?",
-    "au tunachezewa kama sinema?"
-]
+agri_topics = [
+        "bei ya mbaazi",
+        "vibali za kusafirisha nje mbaazi",
+        "kero za wakulima wa korosho",
+        "upatikanaji wa mbolea kwa wakati",
+        "uhifadhi wa mazao vijijini",
+        "usafirishaji wa mazao kuvuka mipaka",
+        "miundombinu ya umwagiliaji",
+        "ushuru usioeleweka kwa wakulima",
+        "ufuatiliaji wa vyama vya ushirika",
+        "changamoto za soko la ndani"
+    ]
 
-topics = [
-    "vurugu za baada ya uchaguzi",
-    "malalamiko ya wananchi",
-    "haki za binadamu",
-    "fidia kwa waathiriwa",
-    "uchunguzi huru",
-    "watu waliopotea",
-    "ukamataji usiofuata sheria",
-    "matumizi ya nguvu kupita kiasi",
-    "uwazi wa taarifa",
-    "wajibu wa serikali"
-]
-
-def generate_questions():
+def generate_question():
     pres = random.choice(president_refs)
-    gov = random.choice(gov_refs)
-    top = random.choice(topics)
-    funny = random.choice(funny_bits)
-    q = f"{pres} kuhusu {top}, na {gov} juu ya hilo {funny}"
+    top = random.choice(agri_topics)
+    inj = random.choice(injecting_bits)
+    q = f"{pres} {top},{inj}"
     return q
 
 if __name__ == "__main__":
-    print(generate_questions())
+    print(generate_question())
+        
