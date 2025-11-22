@@ -2,6 +2,7 @@ import cloudscraper
 import random
 import csv
 import login
+import generate_question
 
 
 def get_token():
@@ -42,5 +43,5 @@ def ask_question(swali):
 if __name__ == "__main__":
     scraper = cloudscraper.create_scraper()
     
-    swali = test.main()
+    swali = generate_question.generate_questions()
     print(ask_question(swali))
